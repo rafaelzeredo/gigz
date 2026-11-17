@@ -41,7 +41,7 @@ LD={"@context":"https://schema.org","@type":"MusicGroup","@id":"https://rafaelze
     "logo":"https://rafaelzeredo.github.io/GigZ/assets/brand/icon-512.png","foundingDate":"2023",
     "foundingLocation":{"@type":"Place","name":"Brasília, Distrito Federal, Brasil"},
     "genre":["Rock","Reggae","Blues","Soul"],"description":"Power trio de Brasília formado em 2023: voz e violão, baixo e bateria.",
-    "member":[{"@type":"OrganizationRole","roleName":"Voz e violão","member":{"@type":"Person","name":"Rafael Z","url":"https://rafaelzeredo.github.io/","@id":"https://rafaelzeredo.github.io/#rafael-z"}}],
+    "member":[{"@type":"OrganizationRole","roleName":"Voz e violão","member":{"@type":"Person","name":"Rafael Z","url":"https://rafaelzeredo.github.io/","@id":"https://rafaelzeredo.github.io/#rafael-z"}},{"@type":"OrganizationRole","roleName":"Bateria","member":{"@type":"Person","name":"Alisson (Alvinho)"}},{"@type":"OrganizationRole","roleName":"Baixo","member":{"@type":"Person","name":"João Paulo"}}],
     "contactPoint":{"@type":"ContactPoint","contactType":"booking","telephone":"+55-61-98416-7777","email":"rafaelmartinszeredo@gmail.com","areaServed":"BR","availableLanguage":["pt-BR","en"]}}
 src=open(os.path.join(H,'index.src.html')).read()
 wm=open(os.path.join(os.path.dirname(H),'work','wm_inner.txt')).read().replace('<path class="z"','<path style="fill:var(--zc,#FF5A1F)" class="z"')
