@@ -8,7 +8,7 @@ A static site with no build step for visitors. GitHub Pages serves this folder f
 - **`assets/css/site.css`** and **`assets/js/site.js`**: styles and behaviour (no frameworks).
 - **`assets/brand/`**: the GigZ wordmark (SVG paths, Bricolage Grotesque condensed ExtraBold, with an ember Z) and the icons.
 - **`assets/img/`**: graded photos from the band photo session of 7 July 2026, the musician crops and the share image.
-- **`assets/video/`**: web versions of the Garden Session films (22 July 2026), the hero loops and the posters.
+- **`assets/video/`**: web versions of the Garden Session films (22 July 2026), the hero loops and the posters. "Isn't She Lovely" is a ~55 s excerpt.
 
 Media production files live outside this repository, in `~/Desktop/ClaudeWorkspace/GigZ/`:
 - **`docs/`**: the inventory, song map and decisions.

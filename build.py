@@ -9,15 +9,15 @@ def dur(p):
     return f'{int(s//60)}:{int(round(s%60)):02d}'
 def ver(p): return hashlib.md5(open(os.path.join(H,p),'rb').read()).hexdigest()[:8]
 PLAY='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>'
-SET=[('What I Got','Sublime','what_i_got'),("Isn't She Lovely",'Stevie Wonder',None),('Red House','Jimi Hendrix','red_house'),
+SET=[('What I Got','Sublime','what_i_got'),("Isn't She Lovely",'Stevie Wonder','isnt_she_lovely'),('Red House','Jimi Hendrix','red_house'),
      ('Stand By Me','Ben E. King','stand_by_me'),('Ela Vai Voltar','Charlie Brown Jr.','ela_vai_voltar')]
 rows=[]
 for i,(t,a,slug) in enumerate(SET,1):
     if slug:
-        v=f'assets/video/film_{slug}.mp4'; rows.append(f'<button class="song" role="listitem" data-src="{v}" data-poster="assets/video/film_{slug}.jpg" data-title="{html.escape(t)}" aria-current="{"true" if i==1 else "false"}"><span class="n">{i:02d}</span><span class="t">{html.escape(t)}<small>{html.escape(a)}</small></span><span class="d">▶ {dur(v)}</span></button>')
+        v=f'assets/video/film_{slug}.mp4'; rows.append(f'<button class="song" role="listitem" data-src="{v}" data-poster="assets/video/film_{slug}.jpg" data-title="{html.escape(t)}" aria-current="{"true" if i==1 else "false"}"><span class="n">{i:02d}</span><span class="t">{html.escape(t)}<small>{html.escape(a)}</small></span><span class="d">{"▶ "+dur(v)+(" · trecho" if slug=="isnt_she_lovely" else "")}</span></button>')
     else:
         rows.append(f'<div class="song nofilm" role="listitem"><span class="n">{i:02d}</span><span class="t">{html.escape(t)}<small>{html.escape(a)}</small></span><span class="d">·</span></div>')
-VIDS=[('promo','Garden Session','Trailer',True),('what_i_got','What I Got','Sublime',False),('red_house','Red House','Jimi Hendrix',False),
+VIDS=[('promo','Garden Session','Trailer',True),('what_i_got','What I Got','Sublime',False),('isnt_she_lovely',"Isn't She Lovely",'Stevie Wonder',False),('red_house','Red House','Jimi Hendrix',False),
       ('stand_by_me','Stand By Me','Ben E. King',False),('ela_vai_voltar','Ela Vai Voltar','Charlie Brown Jr.',False),
       ('promo_916','Garden Session · 9:16','Reels · Stories',False),('social_what_i_got_916','What I Got · 30 s','Reels · Stories',False)]
 cards=[]
