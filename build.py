@@ -36,13 +36,13 @@ GAL=[('img_1817','g1','A GigZ com os instrumentos no jardim: violão, bumbo e ba
      ('img_1816','g5','Rafael Z, o baterista e o baixista com os instrumentos'),('img_1826','g6','A banda de braços cruzados diante da cerca'),
      ('img_1814','g7','Retrato da banda com violão e baixo, ao fim da tarde')]
 gal=''.join(f'<button class="{g} rv" data-full="assets/img/photos/{n}.jpg"><img src="assets/img/photos/{n}_s.jpg" srcset="assets/img/photos/{n}_s.jpg 900w, assets/img/photos/{n}.jpg 1800w" sizes="(max-width:899px) 50vw, 40vw" loading="lazy" alt="{html.escape(alt)}"></button>' for n,g,alt in GAL)
-LD={"@context":"https://schema.org","@type":"MusicGroup","@id":"https://rafaelzeredo.github.io/GigZ/#band","name":"GigZ",
-    "url":"https://rafaelzeredo.github.io/GigZ/","image":"https://rafaelzeredo.github.io/GigZ/assets/img/og/og.jpg",
-    "logo":"https://rafaelzeredo.github.io/GigZ/assets/brand/icon-512.png","foundingDate":"2023",
+LD={"@context":"https://schema.org","@type":"MusicGroup","@id":"https://rafaelzeredo.github.io/gigz/#band","name":"GigZ",
+    "url":"https://rafaelzeredo.github.io/gigz/","image":"https://rafaelzeredo.github.io/gigz/assets/img/og/og.jpg",
+    "logo":"https://rafaelzeredo.github.io/gigz/assets/brand/icon-512.png","foundingDate":"2026",
     "foundingLocation":{"@type":"Place","name":"Brasília, Distrito Federal, Brasil"},
-    "genre":["Rock","Reggae","Blues","Soul"],"description":"Power trio de Brasília formado em 2023: voz e violão, baixo e bateria.",
+    "genre":["Rock","Reggae","Blues","Soul"],"description":"Power trio de Brasília formado em 2026: voz e violão, baixo e bateria.",
     "member":[{"@type":"OrganizationRole","roleName":"Voz e violão","member":{"@type":"Person","name":"Rafael Z","url":"https://rafaelzeredo.github.io/","@id":"https://rafaelzeredo.github.io/#rafael-z"}},{"@type":"OrganizationRole","roleName":"Bateria","member":{"@type":"Person","name":"Alisson (Alvinho)"}},{"@type":"OrganizationRole","roleName":"Baixo","member":{"@type":"Person","name":"João Paulo"}}],
-    "contactPoint":{"@type":"ContactPoint","contactType":"booking","telephone":"+55-61-98416-7777","email":"rafaelmartinszeredo@gmail.com","areaServed":"BR","availableLanguage":["pt-BR","en"]}}
+    "contactPoint":{"@type":"ContactPoint","contactType":"booking","telephone":"+55-61-98416-7777","email":"gig.z.contato@gmail.com","areaServed":"BR","availableLanguage":["pt-BR","en"]}}
 src=open(os.path.join(H,'index.src.html')).read()
 wm=open(os.path.join(os.path.dirname(H),'work','wm_inner.txt')).read().replace('<path class="z"','<path style="fill:var(--zc,#FF5A1F)" class="z"')
 out=(src.replace('@@SETLIST@@','\n        '.join(rows)).replace('@@VIDEOS@@',''.join(cards)).replace('@@GALLERY@@',gal)

@@ -9,7 +9,7 @@
   function setLang(l){
     root.dataset.lang=l;root.lang=l==='pt'?'pt-BR':'en';try{localStorage.setItem('gigz-lang',l)}catch(e){}
     d.querySelectorAll('[data-wa]').forEach(function(a){a.href='https://wa.me/'+WA+'?text='+encodeURIComponent(MSG[l])});
-    var m=d.getElementById('mailBtn');if(m)m.href='mailto:rafaelmartinszeredo@gmail.com?subject='+encodeURIComponent(SUBJ[l]);
+    var m=d.getElementById('mailBtn');if(m)m.href='mailto:gig.z.contato@gmail.com?subject='+encodeURIComponent(SUBJ[l]);
   }
   setLang(lang());
   d.querySelectorAll('.lang button').forEach(function(x){x.addEventListener('click',function(){setLang(x.dataset.set)})});

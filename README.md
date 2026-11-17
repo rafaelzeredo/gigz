@@ -1,6 +1,6 @@
 # GigZ
 
-Official website of **GigZ**, a power trio from Brasília formed in 2023: https://rafaelzeredo.github.io/GigZ/
+Official website of **GigZ**, a power trio from Brasília formed in 2026: https://rafaelzeredo.github.io/gigz/
 
 A static site with no build step for visitors. GitHub Pages serves this folder from `main`.
 

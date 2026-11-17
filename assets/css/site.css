@@ -105,7 +105,7 @@ section{position:relative}
 .trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,26px)}
 .m{position:relative}
 .m .ph{position:relative;overflow:hidden;border-radius:4px;aspect-ratio:3/4;background:#0d1712}
-.m .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.8,.2,1),filter .6s}
+.m .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:transform 1.4s cubic-bezier(.2,.8,.2,1),filter .6s}
 .m:hover .ph img{transform:scale(1.04)}
 .m .ph:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,18,14,.75))}
 .m .tape{left:16px;bottom:18px;--r:-3deg}
