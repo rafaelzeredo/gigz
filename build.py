@@ -1,4 +1,4 @@
-"""Builds index.html from index.src.html: fills the set list, video cards, gallery, structured data and cache-busting
+"""Builds index.html from index.src.html: fills the set list, video cards, structured data and cache-busting
 versions. Durations are read from the actual web video files. Run: python3 build.py"""
 import json,hashlib,subprocess,os,html
 H=os.path.dirname(os.path.abspath(__file__))
@@ -31,21 +31,16 @@ for slug,t,a,feat in VIDS:
     else:
         sub='<span data-pt>Corte vertical para redes sociais</span><span data-en>Vertical cut for social media</span>' if tall else f'{html.escape(a)} · <span data-pt>ao vivo</span><span data-en>live</span>'
         cards.append(f'<button class="vcard rv" data-video="{v}" data-poster="{p}" data-caption="{html.escape(cap)}">{thumb}<h3>{html.escape(t)}</h3><p>{sub}</p></button>')
-GAL=[('img_1817','g1','A GigZ com os instrumentos no jardim: violão, bumbo e baixo'),('img_1824','g2','Os três músicos diante de uma cerca de madeira'),
-     ('img_1813','g3','A banda no jardim, entre palmeiras'),('img_1822','g4','A banda com um cachorro, numa calçada'),
-     ('img_1816','g5','Rafael Z, o baterista e o baixista com os instrumentos'),('img_1826','g6','A banda de braços cruzados diante da cerca'),
-     ('img_1814','g7','Retrato da banda com violão e baixo, ao fim da tarde')]
-gal=''.join(f'<button class="{g} rv" data-full="assets/img/photos/{n}.jpg"><img src="assets/img/photos/{n}_s.jpg" srcset="assets/img/photos/{n}_s.jpg 900w, assets/img/photos/{n}.jpg 1800w" sizes="(max-width:899px) 50vw, 40vw" loading="lazy" alt="{html.escape(alt)}"></button>' for n,g,alt in GAL)
 LD={"@context":"https://schema.org","@type":"MusicGroup","@id":"https://rafaelzeredo.github.io/gigz/#band","name":"GigZ",
     "url":"https://rafaelzeredo.github.io/gigz/","image":"https://rafaelzeredo.github.io/gigz/assets/img/og/og.jpg",
     "logo":"https://rafaelzeredo.github.io/gigz/assets/brand/icon-512.png","foundingDate":"2026",
     "foundingLocation":{"@type":"Place","name":"Brasília, Distrito Federal, Brasil"},
     "genre":["Rock","Reggae","Blues","Soul"],"description":"Power trio de Brasília formado em 2026: voz e violão, baixo e bateria.",
-    "member":[{"@type":"OrganizationRole","roleName":"Voz e violão","member":{"@type":"Person","name":"Rafael Z","url":"https://rafaelzeredo.github.io/","@id":"https://rafaelzeredo.github.io/#rafael-z"}},{"@type":"OrganizationRole","roleName":"Bateria","member":{"@type":"Person","name":"Alisson (Alvinho)"}},{"@type":"OrganizationRole","roleName":"Baixo","member":{"@type":"Person","name":"João Paulo"}}],
+    "member":[{"@type":"OrganizationRole","roleName":"Voz e violão","member":{"@type":"Person","name":"Rafael Z","url":"https://rafaelzeredo.github.io/","@id":"https://rafaelzeredo.github.io/#rafael-z"}},{"@type":"OrganizationRole","roleName":"Bateria","member":{"@type":"Person","name":"Alisson"}},{"@type":"OrganizationRole","roleName":"Baixo","member":{"@type":"Person","name":"João Paulo"}}],
     "contactPoint":{"@type":"ContactPoint","contactType":"booking","telephone":"+55-61-98416-7777","email":"gig.z.contato@gmail.com","areaServed":"BR","availableLanguage":["pt-BR","en"]}}
 src=open(os.path.join(H,'index.src.html')).read()
 wm=open(os.path.join(os.path.dirname(H),'work','wm_inner.txt')).read().replace('<path class="z"','<path style="fill:var(--zc,#FF5A1F)" class="z"')
-out=(src.replace('@@SETLIST@@','\n        '.join(rows)).replace('@@VIDEOS@@',''.join(cards)).replace('@@GALLERY@@',gal)
+out=(src.replace('@@SETLIST@@','\n        '.join(rows)).replace('@@VIDEOS@@',''.join(cards))
      .replace('@@JSONLD@@',json.dumps(LD,ensure_ascii=False,separators=(',',':'))).replace('@@WM@@',wm)
      .replace('@@CSSV@@',ver('assets/css/site.css')).replace('@@JSV@@',ver('assets/js/site.js')))
 assert '@@' not in out
