@@ -8,13 +8,14 @@ def dur(p):
     except Exception: return ''
     return f'{int(s//60)}:{int(round(s%60)):02d}'
 def ver(p): return hashlib.md5(open(os.path.join(H,p),'rb').read()).hexdigest()[:8]
+def pv(p): return f'{p}?v={ver(p)}'  # thumbnails: a changed image gets a new address, so no browser shows a cached old one
 PLAY='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>'
 SET=[('What I Got','Sublime','what_i_got'),("Isn't She Lovely",'Stevie Wonder','isnt_she_lovely'),('Red House','Jimi Hendrix','red_house'),
      ('Stand By Me','Ben E. King','stand_by_me'),('Ela Vai Voltar','Charlie Brown Jr.','ela_vai_voltar')]
 rows=[]
 for i,(t,a,slug) in enumerate(SET,1):
     if slug:
-        v=f'assets/video/film_{slug}.mp4'; rows.append(f'<button class="song" role="listitem" data-src="{v}" data-poster="assets/video/film_{slug}.jpg" data-title="{html.escape(t)}" aria-current="{"true" if i==1 else "false"}"><span class="n">{i:02d}</span><span class="t">{html.escape(t)}<small>{html.escape(a)}</small></span><span class="d">{"▶ "+dur(v)+(" · trecho" if slug=="isnt_she_lovely" else "")}</span></button>')
+        v=f'assets/video/film_{slug}.mp4'; pp=pv(f'assets/video/film_{slug}.jpg'); rows.append(f'<button class="song" role="listitem" data-src="{v}" data-poster="{pp}" data-title="{html.escape(t)}" aria-current="{"true" if i==1 else "false"}"><span class="n">{i:02d}</span><span class="t">{html.escape(t)}<small>{html.escape(a)}</small></span><span class="d">{"▶ "+dur(v)+(" · trecho" if slug=="isnt_she_lovely" else "")}</span></button>')
     else:
         rows.append(f'<div class="song nofilm" role="listitem"><span class="n">{i:02d}</span><span class="t">{html.escape(t)}<small>{html.escape(a)}</small></span><span class="d">·</span></div>')
 VIDS=[('promo','Garden Session','Trailer',True),('what_i_got','What I Got','Sublime',False),('isnt_she_lovely',"Isn't She Lovely",'Stevie Wonder',False),('red_house','Red House','Jimi Hendrix',False),
@@ -22,7 +23,7 @@ VIDS=[('promo','Garden Session','Trailer',True),('what_i_got','What I Got','Subl
       ('promo_916','Garden Session · 9:16','Reels · Stories',False),('social_what_i_got_916','What I Got · 30 s','Reels · Stories',False)]
 cards=[]
 for slug,t,a,feat in VIDS:
-    tall=slug.endswith('_916'); v=f'assets/video/film_{slug}.mp4'; p=f'assets/video/film_{slug}.jpg'
+    tall=slug.endswith('_916'); v=f'assets/video/film_{slug}.mp4'; p=pv(f'assets/video/film_{slug}.jpg')
     if not os.path.exists(os.path.join(H,v)): continue
     cap=f'GigZ · {t} ({a}) · Garden Session 07.2026'
     thumb=f'<span class="thumb{" tall" if tall else ""}"><img src="{p}" alt="" loading="lazy"><span class="play">{PLAY}</span><span class="dur">{dur(v)}</span></span>'
@@ -42,6 +43,6 @@ src=open(os.path.join(H,'index.src.html')).read()
 wm=open(os.path.join(os.path.dirname(H),'work','wm_inner.txt')).read().replace('<path class="z"','<path style="fill:var(--zc,#FF5A1F)" class="z"')
 out=(src.replace('@@SETLIST@@','\n        '.join(rows)).replace('@@VIDEOS@@',''.join(cards))
      .replace('@@JSONLD@@',json.dumps(LD,ensure_ascii=False,separators=(',',':'))).replace('@@WM@@',wm)
-     .replace('@@CSSV@@',ver('assets/css/site.css')).replace('@@JSV@@',ver('assets/js/site.js')))
+     .replace('@@CSSV@@',ver('assets/css/site.css')).replace('@@WIGPOSTER@@',pv('assets/video/film_what_i_got.jpg')).replace('@@JSV@@',ver('assets/js/site.js')))
 assert '@@' not in out
 open(os.path.join(H,'index.html'),'w').write(out); print('index.html',len(out),'bytes;',len(cards),'videos')
